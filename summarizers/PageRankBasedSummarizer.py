@@ -11,7 +11,7 @@ class PageRankBasedSummarizer(ExtractiveSummarizer, ABC):
         self.d = 0.85
         self.steps = 10
 
-    def summarize(self, text, n_sentences):
+    def summarize(self, text, n, percent=None):
         sentences_text = self.get_sentences(text)
         sentences_cleaned = self.clean_sentences(sentences_text)
         matrix = self.__calculate_similarity_matrix(sentences_cleaned)
@@ -20,7 +20,7 @@ class PageRankBasedSummarizer(ExtractiveSummarizer, ABC):
         for epoch in range(self.steps):
             scores = (1 - self.d) + self.d * np.dot(matrix, scores)
 
-        return self.prepare_summary(sentences_text, Utils.get_ranking(scores, n_sentences))
+        return self.prepare_summary(sentences_text, Utils.get_ranking(scores, n))
 
     def __calculate_similarity_matrix(self, tokenized_sentences):
         n = len(tokenized_sentences)

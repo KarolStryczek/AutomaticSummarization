@@ -4,6 +4,7 @@ from summarizers.SumBasicSummarizer import SumBasicSummarizer
 from summarizers.TFIDFSummarizer import TFIDFSummarizer
 from summarizers.TextRankSummarizer import TextRankSummarizer
 from summarizers.LexRankSummarizer import LexRankSummarizer
+from summarizers.AbstractiveSummarizer import AbstractiveSummarizer
 import nltk
 import pandas as pd
 from datetime import datetime
@@ -11,7 +12,8 @@ from datetime import datetime
 
 class RougeEvaluator:
     def __init__(self):
-        self.summarizers = [SumBasicSummarizer(), TFIDFSummarizer(), TextRankSummarizer(), LexRankSummarizer()]
+        self.extractive_summarizers = [SumBasicSummarizer(), TFIDFSummarizer(), TextRankSummarizer(), LexRankSummarizer()]
+        self.abstractive_summarizer = AbstractiveSummarizer()
         self.rouge_evaluator = Rouge()
         self.results = self.load_results()
 
@@ -26,21 +28,35 @@ class RougeEvaluator:
         for file in read_all_PSC_files():
             print(datetime.now().strftime("%H:%M:%S"), file.filename)
             if file.filename not in self.results['filename'].unique():
-                scores = self.evaluate(file)
+                scores = list()  # self.evaluate_extractive(file)
+                scores += self.evaluate_abstractive(file)
                 for score in scores:
                     score_df = pd.DataFrame([score.get_csv_record()], columns=self.results.columns)
                     self.results = pd.concat([self.results, score_df])
             self.save_results()
 
-    def evaluate(self, psc_text: PSCText):
+    def evaluate_extractive(self, psc_text: PSCText):
         scores = list()
         ref_summaries = psc_text.get_all_summaries()
         for ref_summary in ref_summaries:
             n = len(nltk.sent_tokenize(ref_summary.text))
-            for summarizer in self.summarizers:
-                auto_summary = summarizer.summarize(psc_text.text, n)
+            for summarizer in self.extractive_summarizers:
+                auto_summary = summarizer.summarize(psc_text.text, n, ref_summary.ratio)
                 score = self.rouge_evaluator.get_scores(auto_summary, ref_summary.text)[0]
                 scores.append(RougeScore(psc_text.filename, ref_summary, summarizer, score))
+        return scores
+
+    def evaluate_abstractive(self, psc_text: PSCText):
+        scores = list()
+        ref_summaries = psc_text.get_all_summaries()
+        for ratio in [5, 10, 20]:
+            print("Ratio: " + str(ratio))
+            auto_summary = self.abstractive_summarizer.summarize(psc_text.text, None, ratio)
+            print("Scores calculation.")
+            for ref_summary in ref_summaries:
+                if ref_summary.ratio == ratio:
+                    score = self.rouge_evaluator.get_scores(auto_summary, ref_summary.text)[0]
+                    scores.append(RougeScore(psc_text.filename, ref_summary, self.abstractive_summarizer, score))
         return scores
 
 

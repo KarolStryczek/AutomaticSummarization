@@ -14,7 +14,7 @@ class SumBasicSummarizer(FrequencyBasedSummarizer):
     def __init__(self) -> None:
         super().__init__()
 
-    def summarize(self, text: str, n_sentences: int) -> str:
+    def summarize(self, text: str, n: int, percent=None) -> str:
         """
             Runs SumBasic algorithm.
             Steps:
@@ -27,7 +27,7 @@ class SumBasicSummarizer(FrequencyBasedSummarizer):
                 - go to score calculation if more sentences needed
 
             :param text: text to summarize
-            :param n_sentences: number of sentences to be included in summary
+            :param n: number of sentences to be included in summary
             :return: summary of input
         """
         sentences_text = self.get_sentences(text)
@@ -35,7 +35,7 @@ class SumBasicSummarizer(FrequencyBasedSummarizer):
         summary_indexes = list()
         probabilities = self.calculate_tf_values(sentences_cleaned)
 
-        for i in range(n_sentences):
+        for i in range(n):
             scores = [self.get_sentence_score(sentence, probabilities) for sentence in sentences_cleaned]
             best_sentence_index = scores.index(max(scores))
             best_sentence = sentences_cleaned[best_sentence_index]

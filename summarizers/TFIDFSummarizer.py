@@ -8,11 +8,11 @@ class TFIDFSummarizer(FrequencyBasedSummarizer):
         self.idfs = Utils.get_nkjp_idf_values()
         self.default_idf = max(self.idfs.values())
 
-    def summarize(self, text, n_sentences):
+    def summarize(self, text, n, percent=None):
         sentences_text = self.get_sentences(text)
         sentences_cleaned = self.clean_sentences(sentences_text)
         scores = self.calculate_sentences_scores(sentences_cleaned)
-        return self.prepare_summary(sentences_text, Utils.get_ranking(scores, n_sentences))
+        return self.prepare_summary(sentences_text, Utils.get_ranking(scores, n))
 
     def calculate_sentences_scores(self, sentences):
         scores = list()
