@@ -9,7 +9,7 @@ class AbstractSummarizer(ABC):
     """
 
     @abstractmethod
-    def summarize(self, text, n, percent):
+    def summarize(self, text, size):
         """
             Method in subclasses should contain summarization algorithm implementation
         """

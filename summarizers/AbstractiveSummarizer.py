@@ -3,7 +3,6 @@ from transformers import MBartForConditionalGeneration, MBart50TokenizerFast
 from transformers import PegasusForConditionalGeneration, PegasusTokenizer
 import os
 import nltk
-import torch
 from datetime import datetime
 
 
@@ -23,9 +22,9 @@ class AbstractiveSummarizer(AbstractSummarizer):
 
         self.translation_cache = dict()
 
-    def summarize(self, text, n, percent):
+    def summarize(self, text, size):
         words_count = len([token for token in nltk.word_tokenize(text) if token.isalpha()])
-        summary_length = min(200, words_count*percent//100)
+        summary_length = min(200, words_count*size//100)
 
         if self.translation_cache.get(hash(text)) is None:
             sentences = nltk.sent_tokenize(text)
@@ -42,7 +41,7 @@ class AbstractiveSummarizer(AbstractSummarizer):
         summary_en = self.pegasus_summarize(text_en, summary_length)
         print(datetime.now().strftime("%H:%M:%S"), "EN -> PL")
         summary_pl = self.translate(summary_en, self.__en, self.__pl)[0]
-        return summary_pl
+        return summary_pl.replace("<n>", "\n")
 
     def pegasus_summarize(self, text, size):
         print("summary size: " + str(size))

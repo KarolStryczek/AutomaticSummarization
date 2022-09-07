@@ -3,14 +3,12 @@ from spacy.tokens.token import Token
 from .AbstractSummarizer import AbstractSummarizer
 import nltk
 from typing import List
-import spacy
 from util import Utils
 
 
 class ExtractiveSummarizer(AbstractSummarizer, ABC):
 
     def __init__(self):
-        self.nlp = spacy.load("pl_core_news_sm")
         self.language = "polish"
 
     @staticmethod
@@ -33,7 +31,8 @@ class ExtractiveSummarizer(AbstractSummarizer, ABC):
         """
         return nltk.sent_tokenize(text, language=self.language)
 
-    def clean_sentences(self, sentences: List[str]) -> List[List[str]]:
+    @staticmethod
+    def clean_sentences(sentences: List[str]) -> List[List[str]]:
         """
             Splits sentences into words and cleaning words after that.
 
