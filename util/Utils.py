@@ -12,7 +12,6 @@ nlp = spacy.load("pl_core_news_sm")
 
 
 def read_sample_file(filename):
-    # with open(__get_path(filename, "sampledata"), encoding=__default_encoding) as f:
     with open("data/texts/" + filename, encoding=__default_encoding) as f:  # TODO relative path
         return f.read()
 
@@ -27,7 +26,7 @@ def __get_path(filename, subdirectory=None):
 __default_language = 'polish'
 __default_encoding = 'utf-8'
 __NKJP_dir = 'data/NKJP'
-__idf_filepath = 'data/idf.p'
+__idf_filepath = 'util/idf.p'
 
 
 def read_and_clean_xml_file(file):
