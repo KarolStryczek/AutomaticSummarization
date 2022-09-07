@@ -41,7 +41,7 @@ class RougeEvaluator:
         for ref_summary in ref_summaries:
             n = len(nltk.sent_tokenize(ref_summary.text))
             for summarizer in self.extractive_summarizers:
-                auto_summary = summarizer.summarize(psc_text.text, n, ref_summary.ratio)
+                auto_summary = summarizer.summarize(psc_text.text, n)
                 score = self.rouge_evaluator.get_scores(auto_summary, ref_summary.text)[0]
                 scores.append(RougeScore(psc_text.filename, ref_summary, summarizer, score))
         return scores
@@ -50,9 +50,7 @@ class RougeEvaluator:
         scores = list()
         ref_summaries = psc_text.get_all_summaries()
         for ratio in [5, 10, 20]:
-            print("Ratio: " + str(ratio))
-            auto_summary = self.abstractive_summarizer.summarize(psc_text.text, None, ratio)
-            print("Scores calculation.")
+            auto_summary = self.abstractive_summarizer.summarize(psc_text.text, ratio)
             for ref_summary in ref_summaries:
                 if ref_summary.ratio == ratio:
                     score = self.rouge_evaluator.get_scores(auto_summary, ref_summary.text)[0]

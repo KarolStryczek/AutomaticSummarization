@@ -133,23 +133,18 @@ app.layout = html.Div(
 )
 
 
-@app.callback(
-    Output('result-textarea', 'value'),
-    Input('summarize-button', 'n_clicks'),
-    [State('algorithm-select-radio', 'value'),
-     State('input-textarea', 'value'),
-     State('n-input', 'value')],
-    prevent_initial_call=True
-)
+@app.callback(Output('result-textarea', 'value'),
+              Input('summarize-button', 'n_clicks'),
+              [State('algorithm-select-radio', 'value'),
+               State('input-textarea', 'value'),
+               State('n-input', 'value')],
+              prevent_initial_call=True)
 def summarize(n_clicks, algorithm, text, n):
-    print("summarize")
     return summarizers[algorithm].summarize(text, n)
 
 
-@app.callback(
-    Output('size-description', 'children'),
-    Input('algorithm-select-radio', 'value')
-)
+@app.callback(Output('size-description', 'children'),
+              Input('algorithm-select-radio', 'value'))
 def size_description(algorithm):
     return "Procent tekstu wejściowego" if algorithm == "Algorytm abstrakcyjny" else "Liczba zdań"
 
