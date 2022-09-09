@@ -5,13 +5,9 @@ from abc import ABC
 
 class FrequencyBasedSummarizer(ExtractiveSummarizer, ABC):
     """
-        Super class for frequency based extractive summarizers.
+        Abstract super class for frequency based extractive summarizers.
 
-        Contains common method used in specific frequency based extractive summarizers implementation like:
-         - tokenization
-         - data cleaning
-         - stopwords removal
-         - metrics calculation (e.g. TF)
+        Contains common method used in specific frequency based extractive summarizers implementations.
     """
 
     @staticmethod
@@ -19,8 +15,8 @@ class FrequencyBasedSummarizer(ExtractiveSummarizer, ABC):
         """
             Calculates words TF values as number of occurrences divided by words total count.
 
-            :param sentences: list of sentences (sentence as list of words)
-            :return: dictionary of (words, TF) pairs
+            :param sentences: Tokenized list of sentences
+            :return: Dictionary of (words: TF) pairs
         """
         words_cnt = sum([len(sentence) for sentence in sentences])
         tfs = dict()

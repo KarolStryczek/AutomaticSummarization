@@ -1,20 +1,36 @@
 from .ExtractiveSummarizer import ExtractiveSummarizer
 from abc import ABC, abstractmethod
-import numpy as np
+from typing import List
 from util import Utils
+import numpy as np
 
 
 class PageRankBasedSummarizer(ExtractiveSummarizer, ABC):
+    """
+        Abstract super class for PageRank-based summarizers.
+        Contains summarization algorithm that includes operation on similarity matrix
+        that is calculated in the way corresponding to each algorithm.
 
-    def __init__(self):
+        PageRank-based algorithms implementation should implement sentence similarity calculation function.
+    """
+
+    def __init__(self) -> None:
         super().__init__()
         self.d = 0.85
         self.steps = 10
 
-    def summarize(self, text, size):
+    def summarize(self, text: str, size: int) -> str:
+        """
+            PageRank ranking algorithm is applied to graph-based representation of text.
+            N top ranked sentences are extracted as summary.
+
+            :param text:
+            :param size:
+            :return:
+        """
         sentences_text = self.get_sentences(text)
         sentences_cleaned = self.clean_sentences(sentences_text)
-        matrix = self.__calculate_similarity_matrix(sentences_cleaned)
+        matrix = self.calculate_similarity_matrix(sentences_cleaned)
         scores = np.array([1] * len(sentences_cleaned))
 
         for epoch in range(self.steps):
@@ -22,7 +38,13 @@ class PageRankBasedSummarizer(ExtractiveSummarizer, ABC):
 
         return self.prepare_summary(sentences_text, Utils.get_ranking(scores, size))
 
-    def __calculate_similarity_matrix(self, tokenized_sentences):
+    def calculate_similarity_matrix(self, tokenized_sentences: List[List[str]]) -> np.matrix:
+        """
+            Calculates similarity matrix for sentences using abstract method to calculate similarity between sentences.
+
+            :param tokenized_sentences: List of tokenized sentences
+            :return: Similarity matrix as Numpy matrix
+        """
         n = len(tokenized_sentences)
         matrix = np.zeros([n, n])
         for i in range(n):
@@ -39,5 +61,13 @@ class PageRankBasedSummarizer(ExtractiveSummarizer, ABC):
         return matrix
 
     @abstractmethod
-    def calculate_sentence_similarity(self, sentence_x, sentence_y):
+    def calculate_sentence_similarity(self, sentence_x: List[str], sentence_y: List[str]) -> float:
+        """
+            Abstract method that should be implemented in PageRank-based algorithms.
+            Should contain function that calculates similarity between tokenized sentences.
+
+            :param sentence_x: Tokenized sentence
+            :param sentence_y: Tokenized sentence
+            :return: Similarity between sentences
+        """
         pass

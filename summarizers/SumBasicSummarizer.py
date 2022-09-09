@@ -14,21 +14,15 @@ class SumBasicSummarizer(FrequencyBasedSummarizer):
     def __init__(self) -> None:
         super().__init__()
 
-    def summarize(self, text: str, size) -> str:
+    def summarize(self, text: str, size: int) -> str:
         """
-            Runs SumBasic algorithm.
-            Steps:
-                - split text into sentences
-                - clean sentences (remove stopwords, lemmatize)
-                - calculate word probabilities
-                - calculate sentences scores
-                - choose best sentence
-                - update probabilities for words in chosen sentence
-                - go to score calculation if more sentences needed
+            Runs SumBasic algorithm which calculates sentence scores based on words probability calculated behorehand.
+            Word probabilities for word from each chosen sentences are updated in each iteration
+            to ensure that same or similar sentences are not included in summary.
 
-            :param text: text to summarize
-            :param size: requested size of
-            :return: summary of input
+            :param text: Text to summarize
+            :param size: Number of sentences to extract
+            :return: Generated summary
         """
         sentences_text = self.get_sentences(text)
         sentences_cleaned = self.clean_sentences(sentences_text)
@@ -50,8 +44,8 @@ class SumBasicSummarizer(FrequencyBasedSummarizer):
             Updates probabilities after sentence has been chosen to summary.
             Probability of words from that sentence is squared (so it is lower).
 
-            :param sentence: sentence chosen to summary
-            :param probabilities: probabilities dictionary
+            :param sentence: Sentence chosen to summary
+            :param probabilities: Updated probabilities dictionary
         """
         for word in sentence:
             probabilities[word] *= probabilities[word]
@@ -61,9 +55,9 @@ class SumBasicSummarizer(FrequencyBasedSummarizer):
         """
             Calculates scores for sentence based on probabilities dictionary.
 
-            :param sentence: sentence to calculate score
-            :param probabilities: probabilities dictionary
-            :return: score for input sentence
+            :param sentence: Sentence to calculate score for
+            :param probabilities: Probabilities dictionary
+            :return: Score for input sentence
         """
         if len(sentence) == 0:
             return 0
