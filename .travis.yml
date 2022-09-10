@@ -1,8 +1,8 @@
 language: python
 python:
-  - "3.8"
+  - "3.7"
 install:
   - pip install -r requirements.txt
   - python -m spacy download pl_core_news_sm
 script:
-  - python -m pytest tests.py
+  - python -m pytest test.py
