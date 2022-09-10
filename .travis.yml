@@ -2,6 +2,7 @@ language: python
 python:
   - "3.8"
 install:
-  - conda install -r requirements.txt
+  - pip install -r requirements.txt
+  - python -m spacy download pl_core_news_sm
 script:
   - python -m pytest tests.py
