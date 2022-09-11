@@ -30,7 +30,7 @@ class SumBasicSummarizer(FrequencyBasedSummarizer):
         probabilities = self.calculate_tf_values(sentences_cleaned)
 
         for i in range(size):
-            scores = [self.get_sentence_score(sentence, probabilities) for sentence in sentences_cleaned]
+            scores = [self.calculate_score(sentence, probabilities) for sentence in sentences_cleaned]
             best_sentence_index = scores.index(max(scores))
             best_sentence = sentences_cleaned[best_sentence_index]
             self.update_probabilities(best_sentence, probabilities)
@@ -51,7 +51,7 @@ class SumBasicSummarizer(FrequencyBasedSummarizer):
             probabilities[word] *= probabilities[word]
 
     @staticmethod
-    def get_sentence_score(sentence: List[str], probabilities: Dict[str, float]) -> float:
+    def calculate_score(sentence: List[str], probabilities: Dict[str, float]) -> float:
         """
             Calculates scores for sentence based on probabilities dictionary.
 

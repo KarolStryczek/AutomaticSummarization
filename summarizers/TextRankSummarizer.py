@@ -11,7 +11,7 @@ class TextRankSummarizer(PageRankBasedSummarizer):
         and implements only sentence similarity calculation function.
     """
 
-    def calculate_sentence_similarity(self, sentence_x: List[str], sentence_y: List[str]) -> float:
+    def calculate_similarity(self, sentence_x: List[str], sentence_y: List[str]) -> float:
         """
             Sentence similarity implementation for TextRank algorithm.
             It is based on normalized sum of common tokens in compared sentences.

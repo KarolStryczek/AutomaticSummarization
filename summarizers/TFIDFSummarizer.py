@@ -24,10 +24,10 @@ class TFIDFSummarizer(FrequencyBasedSummarizer):
         """
         sentences_text = self.get_sentences(text)
         sentences_cleaned = self.clean_sentences(sentences_text)
-        scores = self.calculate_sentences_scores(sentences_cleaned)
+        scores = self.calculate_scores(sentences_cleaned)
         return self.prepare_summary(sentences_text, Utils.get_ranking(scores, size))
 
-    def calculate_sentences_scores(self, sentences: List[List[str]]) -> List[float]:
+    def calculate_scores(self, sentences: List[List[str]]) -> List[float]:
         """
             Calculates sentence scores as average TF-IDF value of its words.
 
@@ -43,11 +43,11 @@ class TFIDFSummarizer(FrequencyBasedSummarizer):
 
             sentence_tf_idfs = list()
             for word in sentence:
-                sentence_tf_idfs.append(tfs[word] * self.get_word_idf(word))
+                sentence_tf_idfs.append(tfs[word] * self.get_idf(word))
             scores.append(sum(sentence_tf_idfs)/len(sentence))
         return scores
 
-    def get_word_idf(self, word: str) -> float:
+    def get_idf(self, word: str) -> float:
         """
             Retrieve IDF value for word calculated beforehand.
             If word was not found in IDF dictionary, returns default IDF which is max IDF from IDF dictionary.
@@ -56,7 +56,4 @@ class TFIDFSummarizer(FrequencyBasedSummarizer):
             :param word: Word for which IDF value should be returned
             :return: IDF value for word
         """
-        try:
-            return self.idfs[word]
-        except KeyError:
-            return self.default_idf
+        return self.idfs.get(word, self.default_idf)
