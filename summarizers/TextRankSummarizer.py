@@ -28,3 +28,5 @@ class TextRankSummarizer(PageRankBasedSummarizer):
             if word in sentence_y:
                 similarity += 1
         similarity /= (np.log10(len(sentence_x)*len(sentence_y)))
+
+        return similarity
