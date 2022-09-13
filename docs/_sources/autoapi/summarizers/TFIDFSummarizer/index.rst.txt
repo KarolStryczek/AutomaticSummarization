@@ -1,0 +1,54 @@
+:py:mod:`summarizers.TFIDFSummarizer`
+=====================================
+
+.. py:module:: summarizers.TFIDFSummarizer
+
+
+Module Contents
+---------------
+
+Classes
+~~~~~~~
+
+.. autoapisummary::
+
+   summarizers.TFIDFSummarizer.TFIDFSummarizer
+
+
+
+
+.. py:class:: TFIDFSummarizer
+
+   Bases: :py:obj:`summarizers.FrequencyBasedSummarizer.FrequencyBasedSummarizer`
+
+   Implementation of TF-IDF-based text summarizer for Polish language.
+
+   .. py:method:: summarize(text: str, size: int) -> str
+
+      TF-IDF algorithm implementation.
+      Calculates sentence scores based on words TF-IDF values and creates summary from n top ranked sentences.
+
+      :param text: Input text to summarize
+      :param size: Number of sentences to include in summary
+      :return: Generated summary
+
+
+   .. py:method:: calculate_scores(sentences: List[List[str]]) -> List[float]
+
+      Calculates sentence scores as average TF-IDF value of its words.
+
+      :param sentences: List of sentences
+      :return: List of scores for sentences in the same order as input
+
+
+   .. py:method:: get_idf(word: str) -> float
+
+      Retrieve IDF value for word calculated beforehand.
+      If word was not found in IDF dictionary, returns default IDF which is max IDF from IDF dictionary.
+      Assumes that word that did not appear in source corpus 1 time is as common as the rarest word in corpus.
+
+      :param word: Word for which IDF value should be returned
+      :return: IDF value for word
+
+
+

@@ -1,0 +1,49 @@
+:py:mod:`summarizers.LexRankSummarizer`
+=======================================
+
+.. py:module:: summarizers.LexRankSummarizer
+
+
+Module Contents
+---------------
+
+Classes
+~~~~~~~
+
+.. autoapisummary::
+
+   summarizers.LexRankSummarizer.LexRankSummarizer
+
+
+
+
+.. py:class:: LexRankSummarizer
+
+   Bases: :py:obj:`summarizers.PageRankBasedSummarizer.PageRankBasedSummarizer`
+
+   Implementation of LexRank algorithm.
+
+   It is based in summarization algorithm implemented in PageRankBasedSummarizer
+   and implements only sentence similarity calculation function.
+
+   .. py:method:: calculate_similarity(sentence_x: List[str], sentence_y: List[str]) -> float
+
+      Sentence similarity implementation for LexRank algorithm.
+      It is based on IDF modified cosine similarity of sentences.
+
+      :param sentence_x: Tokenized sentence
+      :param sentence_y: Tokenized sentence
+      :return: Similarity measure between sentences
+
+
+   .. py:method:: get_idf(word: str) -> float
+
+      Retrieves IDF value for word from dictionary calculated beforehand.
+      If there is no IDF value for requested word, default value is returned.
+      Default is calculated as max IDF value from dictionary.
+
+      :param word: Word for which IDF value should be returned
+      :return: IDF value for the word
+
+
+

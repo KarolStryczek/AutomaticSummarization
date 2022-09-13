@@ -1,0 +1,52 @@
+:py:mod:`util.PSCReader`
+========================
+
+.. py:module:: util.PSCReader
+
+
+Module Contents
+---------------
+
+Classes
+~~~~~~~
+
+.. autoapisummary::
+
+   util.PSCReader.PSCSummary
+   util.PSCReader.PSCText
+
+
+
+Functions
+~~~~~~~~~
+
+.. autoapisummary::
+
+   util.PSCReader.read_all_PSC_files
+
+
+
+.. py:class:: PSCSummary(summary_xml)
+
+   Utility class to store properties and content of reference summary from Polish Summaries Corpus.
+
+
+.. py:class:: PSCText(filename, text_xml)
+
+   Utility class to store properties, text and summaries of texts from Polish Summaries Corpus.
+
+   .. py:method:: get_all_summaries() -> List[PSCSummary]
+
+      Returns all summaries from given text.
+
+      :return: List of summaries
+
+
+
+.. py:function:: read_all_PSC_files() -> List[PSCText]
+
+   Utility function that loads and parses all Polish Summaries Corpus files.
+
+   :return: List of Polish Summaries Corpus texts
+
+

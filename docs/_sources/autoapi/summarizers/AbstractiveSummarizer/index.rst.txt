@@ -1,0 +1,61 @@
+:py:mod:`summarizers.AbstractiveSummarizer`
+===========================================
+
+.. py:module:: summarizers.AbstractiveSummarizer
+
+
+Module Contents
+---------------
+
+Classes
+~~~~~~~
+
+.. autoapisummary::
+
+   summarizers.AbstractiveSummarizer.AbstractiveSummarizer
+
+
+
+
+.. py:class:: AbstractiveSummarizer
+
+   Bases: :py:obj:`summarizers.AbstractSummarizer.AbstractSummarizer`
+
+   Implementation of abstractive summarization for Polish language.
+   It is based on 3 steps:
+       - Polish text translation into English using MBart-50 Many-To-Many model
+       - Summarization using Google PEGASUS (CNN/DailyMail) model of English text
+       - English summary translation to Polish
+
+   .. py:method:: summarize(text: str, size: int) -> str
+
+      Summarization process uses machine translation models to translate Polish text to English
+      in batches consisting of 15 sentences at most.
+      PEGASUS model is then applied to generate abstractive summary that is later on translated again to Polish.
+      Maximal size of generated summary is set to 200 tokens.
+
+      :param text: Text to summarize
+      :param size: Number of tokens to generate in summary (approximate)
+      :return: Generated abstractive summary
+
+
+   .. py:method:: pegasus_summarize(text: str, size: int) -> str
+
+      Abstractive summarization using PEGASUS model.
+
+      :param text: Text to summarize
+      :param size: Number of tokens to generate in summary (approximate)
+      :return: Generated abstractive summary
+
+
+   .. py:method:: translate(text: str, source_language: str, target_language: str) -> str
+
+      Machine translation using MBArt-50 Many-To-Many model.
+
+      :param text: Text to translate
+      :param source_language: Translation source language
+      :param target_language: Translation target language
+      :return:
+
+
+

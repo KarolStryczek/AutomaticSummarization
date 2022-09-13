@@ -1,0 +1,61 @@
+:py:mod:`summarizers.SumBasicSummarizer`
+========================================
+
+.. py:module:: summarizers.SumBasicSummarizer
+
+
+Module Contents
+---------------
+
+Classes
+~~~~~~~
+
+.. autoapisummary::
+
+   summarizers.SumBasicSummarizer.SumBasicSummarizer
+
+
+
+
+.. py:class:: SumBasicSummarizer
+
+   Bases: :py:obj:`summarizers.FrequencyBasedSummarizer.FrequencyBasedSummarizer`
+
+   Allows automatic summarization of documents in Polish using SumBasic extractive summarization.
+
+   SumBasic calculates probability of words' occurrences and uses it to calculate sentence score.
+   Best sentence is chosen for summarization, probabilities for words in that sentences are updated and new
+   iteration starts from score calculation.
+
+   .. py:method:: summarize(text: str, size: int) -> str
+
+      Runs SumBasic algorithm which calculates sentence scores based on words probability calculated behorehand.
+      Word probabilities for word from each chosen sentences are updated in each iteration
+      to ensure that same or similar sentences are not included in summary.
+
+      :param text: Text to summarize
+      :param size: Number of sentences to extract
+      :return: Generated summary
+
+
+   .. py:method:: update_probabilities(sentence: List[str], probabilities: Dict[str, float]) -> None
+      :staticmethod:
+
+      Updates probabilities after sentence has been chosen to summary.
+      Probability of words from that sentence is squared (so it is lower).
+
+      :param sentence: Sentence chosen to summary
+      :param probabilities: Updated probabilities dictionary
+
+
+   .. py:method:: calculate_score(sentence: List[str], probabilities: Dict[str, float]) -> float
+      :staticmethod:
+
+      Calculates scores for sentence based on probabilities dictionary.
+
+      :param sentence: Sentence to calculate score for
+      :param probabilities: Probabilities dictionary
+      :return: Score for input sentence
+
+
+

@@ -1,0 +1,333 @@
+
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.19: https://docutils.sourceforge.io/" />
+
+    <title>util.Utils &#8212; Automatic Summarization 1.0 documentation</title>
+    <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/alabaster.css" />
+    <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css" />
+    <script data-url_root="../../../" id="documentation_options" src="../../../_static/documentation_options.js"></script>
+    <script src="../../../_static/jquery.js"></script>
+    <script src="../../../_static/underscore.js"></script>
+    <script src="../../../_static/_sphinx_javascript_frameworks_compat.js"></script>
+    <script src="../../../_static/doctools.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+   
+  <link rel="stylesheet" href="../../../_static/custom.css" type="text/css" />
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=0.9, maximum-scale=0.9" />
+
+  </head><body>
+  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          
+
+          <div class="body" role="main">
+            
+  <section id="module-util.Utils">
+<span id="util-utils"></span><h1><a class="reference internal" href="#module-util.Utils" title="util.Utils"><code class="xref py py-mod docutils literal notranslate"><span class="pre">util.Utils</span></code></a><a class="headerlink" href="#module-util.Utils" title="Permalink to this heading">¶</a></h1>
+<section id="module-contents">
+<h2>Module Contents<a class="headerlink" href="#module-contents" title="Permalink to this heading">¶</a></h2>
+<section id="functions">
+<h3>Functions<a class="headerlink" href="#functions" title="Permalink to this heading">¶</a></h3>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#util.Utils.get_nkjp_idf_values" title="util.Utils.get_nkjp_idf_values"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_nkjp_idf_values</span></code></a>(→ Dict[str, float])</p></td>
+<td><p>Calculates IDF values for all words from texts in NKJP one million sub-corpus.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#util.Utils.load_all_NKJP_texts" title="util.Utils.load_all_NKJP_texts"><code class="xref py py-obj docutils literal notranslate"><span class="pre">load_all_NKJP_texts</span></code></a>(→ List[str])</p></td>
+<td><p>Loads all texts from NKJP directory. That includes XML parsing, and pre-processing.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#util.Utils.get_all_subdirectories" title="util.Utils.get_all_subdirectories"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_all_subdirectories</span></code></a>(→ List[str])</p></td>
+<td><p>Returns all subdirectories of given directory.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#util.Utils.read_and_clean_nkjp_xml_file" title="util.Utils.read_and_clean_nkjp_xml_file"><code class="xref py py-obj docutils literal notranslate"><span class="pre">read_and_clean_nkjp_xml_file</span></code></a>(→ str)</p></td>
+<td><p>Loads and cleand NKJP file in TEI standard.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#util.Utils.calculate_idf_values" title="util.Utils.calculate_idf_values"><code class="xref py py-obj docutils literal notranslate"><span class="pre">calculate_idf_values</span></code></a>(→ Dict[str, float])</p></td>
+<td><p>Calculates IDF values for words within given corpus.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#util.Utils.tokenize_and_clean_text" title="util.Utils.tokenize_and_clean_text"><code class="xref py py-obj docutils literal notranslate"><span class="pre">tokenize_and_clean_text</span></code></a>(→ List[str])</p></td>
+<td><p>Text tokenization with lemmatization, lowercase, stopwords and punctuation marks removal.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#util.Utils.should_include_token" title="util.Utils.should_include_token"><code class="xref py py-obj docutils literal notranslate"><span class="pre">should_include_token</span></code></a>(→ bool)</p></td>
+<td><p>Determines if token should be included in tokens list.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#util.Utils.get_ranking" title="util.Utils.get_ranking"><code class="xref py py-obj docutils literal notranslate"><span class="pre">get_ranking</span></code></a>(→ List[int])</p></td>
+<td><p>Returns indexes of top ranked sentences based on their scores.</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#util.Utils.sort_dict_by_value" title="util.Utils.sort_dict_by_value"><code class="xref py py-obj docutils literal notranslate"><span class="pre">sort_dict_by_value</span></code></a>(→ Dict[Any, Any])</p></td>
+<td><p>Sorts dictionary by its values in reversed order.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#util.Utils.calculate_tf_values" title="util.Utils.calculate_tf_values"><code class="xref py py-obj docutils literal notranslate"><span class="pre">calculate_tf_values</span></code></a>(→ Dict[str, int])</p></td>
+<td><p>Calculates TF values for words in given sentence.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="attributes">
+<h3>Attributes<a class="headerlink" href="#attributes" title="Permalink to this heading">¶</a></h3>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#util.Utils.nlp" title="util.Utils.nlp"><code class="xref py py-obj docutils literal notranslate"><span class="pre">nlp</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#util.Utils.__default_language" title="util.Utils.__default_language"><code class="xref py py-obj docutils literal notranslate"><span class="pre">__default_language</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#util.Utils.__default_encoding" title="util.Utils.__default_encoding"><code class="xref py py-obj docutils literal notranslate"><span class="pre">__default_encoding</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#util.Utils.__NKJP_dir" title="util.Utils.__NKJP_dir"><code class="xref py py-obj docutils literal notranslate"><span class="pre">__NKJP_dir</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#util.Utils.__idf_filepath" title="util.Utils.__idf_filepath"><code class="xref py py-obj docutils literal notranslate"><span class="pre">__idf_filepath</span></code></a></p></td>
+<td><p></p></td>
+</tr>
+</tbody>
+</table>
+<dl class="py data">
+<dt class="sig sig-object py" id="util.Utils.nlp">
+<span class="sig-prename descclassname"><span class="pre">util.Utils.</span></span><span class="sig-name descname"><span class="pre">nlp</span></span><a class="headerlink" href="#util.Utils.nlp" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="util.Utils.__default_language">
+<span class="sig-prename descclassname"><span class="pre">util.Utils.</span></span><span class="sig-name descname"><span class="pre">__default_language</span></span><em class="property"><span class="w"> </span><span class="pre">=</span> <span class="pre">polish</span></em><a class="headerlink" href="#util.Utils.__default_language" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="util.Utils.__default_encoding">
+<span class="sig-prename descclassname"><span class="pre">util.Utils.</span></span><span class="sig-name descname"><span class="pre">__default_encoding</span></span><em class="property"><span class="w"> </span><span class="pre">=</span> <span class="pre">utf-8</span></em><a class="headerlink" href="#util.Utils.__default_encoding" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="util.Utils.__NKJP_dir">
+<span class="sig-prename descclassname"><span class="pre">util.Utils.</span></span><span class="sig-name descname"><span class="pre">__NKJP_dir</span></span><em class="property"><span class="w"> </span><span class="pre">=</span> <span class="pre">data/NKJP</span></em><a class="headerlink" href="#util.Utils.__NKJP_dir" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py data">
+<dt class="sig sig-object py" id="util.Utils.__idf_filepath">
+<span class="sig-prename descclassname"><span class="pre">util.Utils.</span></span><span class="sig-name descname"><span class="pre">__idf_filepath</span></span><em class="property"><span class="w"> </span><span class="pre">=</span> <span class="pre">util/idf.p</span></em><a class="headerlink" href="#util.Utils.__idf_filepath" title="Permalink to this definition">¶</a></dt>
+<dd></dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="util.Utils.get_nkjp_idf_values">
+<span class="sig-prename descclassname"><span class="pre">util.Utils.</span></span><span class="sig-name descname"><span class="pre">get_nkjp_idf_values</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#util.Utils.get_nkjp_idf_values" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates IDF values for all words from texts in NKJP one million sub-corpus.
+Values are serialized after calculation so they cen be used again without calculating them again.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>Dictionary of (word: IDF value) pairs</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="util.Utils.load_all_NKJP_texts">
+<span class="sig-prename descclassname"><span class="pre">util.Utils.</span></span><span class="sig-name descname"><span class="pre">load_all_NKJP_texts</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#util.Utils.load_all_NKJP_texts" title="Permalink to this definition">¶</a></dt>
+<dd><p>Loads all texts from NKJP directory. That includes XML parsing, and pre-processing.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p>List of loaded texts</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="util.Utils.get_all_subdirectories">
+<span class="sig-prename descclassname"><span class="pre">util.Utils.</span></span><span class="sig-name descname"><span class="pre">get_all_subdirectories</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">directory</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#util.Utils.get_all_subdirectories" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns all subdirectories of given directory.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>directory</strong> – The main directory</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>List of subdirectories</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="util.Utils.read_and_clean_nkjp_xml_file">
+<span class="sig-prename descclassname"><span class="pre">util.Utils.</span></span><span class="sig-name descname"><span class="pre">read_and_clean_nkjp_xml_file</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">file</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">TextIO</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">str</span></span></span><a class="headerlink" href="#util.Utils.read_and_clean_nkjp_xml_file" title="Permalink to this definition">¶</a></dt>
+<dd><p>Loads and cleand NKJP file in TEI standard.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>file</strong> – NKJP file to be parsed and cleaned.</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>NKJP file text.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="util.Utils.calculate_idf_values">
+<span class="sig-prename descclassname"><span class="pre">util.Utils.</span></span><span class="sig-name descname"><span class="pre">calculate_idf_values</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">corpus</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#util.Utils.calculate_idf_values" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates IDF values for words within given corpus.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>corpus</strong> – Corpus of texts</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Dictionary of (word: IDF value) pairs</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="util.Utils.tokenize_and_clean_text">
+<span class="sig-prename descclassname"><span class="pre">util.Utils.</span></span><span class="sig-name descname"><span class="pre">tokenize_and_clean_text</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">text</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#util.Utils.tokenize_and_clean_text" title="Permalink to this definition">¶</a></dt>
+<dd><p>Text tokenization with lemmatization, lowercase, stopwords and punctuation marks removal.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>text</strong> – Input text to tokenize and clean</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>List of cleaned tokens</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="util.Utils.should_include_token">
+<span class="sig-prename descclassname"><span class="pre">util.Utils.</span></span><span class="sig-name descname"><span class="pre">should_include_token</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">token</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">spacy.tokens.token.Token</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">bool</span></span></span><a class="headerlink" href="#util.Utils.should_include_token" title="Permalink to this definition">¶</a></dt>
+<dd><p>Determines if token should be included in tokens list.
+Removes stopwords, whitespaces and punctuation marks.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>token</strong> – spaCy token to be checked</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Flag indicating if token should be included in tokens list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="util.Utils.get_ranking">
+<span class="sig-prename descclassname"><span class="pre">util.Utils.</span></span><span class="sig-name descname"><span class="pre">get_ranking</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">scores</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">float</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">n</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#util.Utils.get_ranking" title="Permalink to this definition">¶</a></dt>
+<dd><p>Returns indexes of top ranked sentences based on their scores.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>scores</strong> – List of scores calculated for sentences</p></li>
+<li><p><strong>n</strong> – Number of top indexes to return</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>List of top indexes sorted by score</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="util.Utils.sort_dict_by_value">
+<span class="sig-prename descclassname"><span class="pre">util.Utils.</span></span><span class="sig-name descname"><span class="pre">sort_dict_by_value</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">dic</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">Any</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">Any</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#util.Utils.sort_dict_by_value" title="Permalink to this definition">¶</a></dt>
+<dd><p>Sorts dictionary by its values in reversed order.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>dic</strong> – Dictionary to be sorted</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Sorted dictionary</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="util.Utils.calculate_tf_values">
+<span class="sig-prename descclassname"><span class="pre">util.Utils.</span></span><span class="sig-name descname"><span class="pre">calculate_tf_values</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">tokenized_sentence</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">Dict</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">,</span></span><span class="w"> </span><span class="pre">int</span><span class="p"><span class="pre">]</span></span></span></span><a class="headerlink" href="#util.Utils.calculate_tf_values" title="Permalink to this definition">¶</a></dt>
+<dd><p>Calculates TF values for words in given sentence.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>tokenized_sentence</strong> – Tokenized sentence</p>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Dictionary of (token: TF value) pairs</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+</section>
+</section>
+
+
+          </div>
+          
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+<h1 class="logo"><a href="../../../index.html">Automatic Summarization</a></h1>
+
+
+
+
+
+
+
+
+<h3>Navigation</h3>
+<p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="../../index.html">API Reference</a></li>
+</ul>
+
+<div class="relations">
+<h3>Related Topics</h3>
+<ul>
+  <li><a href="../../../index.html">Documentation overview</a><ul>
+  </ul></li>
+</ul>
+</div>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="../../../search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false"/>
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>document.getElementById('searchbox').style.display = "block"</script>
+
+
+
+
+
+
+
+
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="footer">
+      &copy;2022, Karol Stryczek.
+      
+      |
+      Powered by <a href="http://sphinx-doc.org/">Sphinx 5.1.1</a>
+      &amp; <a href="https://github.com/bitprophet/alabaster">Alabaster 0.7.12</a>
+      
+      |
+      <a href="../../../_sources/autoapi/util/Utils/index.rst.txt"
+          rel="nofollow">Page source</a>
+    </div>
+
+    
+
+    
+  </body>
+</html>

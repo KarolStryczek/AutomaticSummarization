@@ -1,0 +1,59 @@
+:py:mod:`summarizers.PageRankBasedSummarizer`
+=============================================
+
+.. py:module:: summarizers.PageRankBasedSummarizer
+
+
+Module Contents
+---------------
+
+Classes
+~~~~~~~
+
+.. autoapisummary::
+
+   summarizers.PageRankBasedSummarizer.PageRankBasedSummarizer
+
+
+
+
+.. py:class:: PageRankBasedSummarizer
+
+   Bases: :py:obj:`summarizers.ExtractiveSummarizer.ExtractiveSummarizer`, :py:obj:`abc.ABC`
+
+   Abstract super class for PageRank-based summarizers.
+   Contains summarization algorithm that includes operation on similarity matrix
+   that is calculated in the way corresponding to each algorithm.
+
+   PageRank-based algorithms implementation should implement sentence similarity calculation function.
+
+   .. py:method:: summarize(text: str, size: int) -> str
+
+      PageRank ranking algorithm is applied to graph-based representation of text.
+      N top ranked sentences are extracted as summary.
+
+      :param text:
+      :param size:
+      :return:
+
+
+   .. py:method:: create_similarity_matrix(tokenized_sentences: List[List[str]]) -> numpy.matrix
+
+      Calculates similarity matrix for sentences using abstract method to calculate similarity between sentences.
+
+      :param tokenized_sentences: List of tokenized sentences
+      :return: Similarity matrix as Numpy matrix
+
+
+   .. py:method:: calculate_similarity(sentence_x: List[str], sentence_y: List[str]) -> float
+      :abstractmethod:
+
+      Abstract method that should be implemented in PageRank-based algorithms.
+      Should contain function that calculates similarity between tokenized sentences.
+
+      :param sentence_x: Tokenized sentence
+      :param sentence_y: Tokenized sentence
+      :return: Similarity between sentences
+
+
+

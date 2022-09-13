@@ -1,0 +1,55 @@
+:py:mod:`summarizers.ExtractiveSummarizer`
+==========================================
+
+.. py:module:: summarizers.ExtractiveSummarizer
+
+
+Module Contents
+---------------
+
+Classes
+~~~~~~~
+
+.. autoapisummary::
+
+   summarizers.ExtractiveSummarizer.ExtractiveSummarizer
+
+
+
+
+.. py:class:: ExtractiveSummarizer
+
+   Bases: :py:obj:`summarizers.AbstractSummarizer.AbstractSummarizer`, :py:obj:`abc.ABC`
+
+   Abstract super class for all extractive summarizers.
+
+   Contains common methods used in specific implementations.
+
+   .. py:method:: prepare_summary(sentences_text: List[str], indexes: List[int]) -> str
+      :staticmethod:
+
+      Prepares summary based on list of all sentences and indexes chosen by algorithm to be included in summary.
+
+      :param sentences_text: List of sentences
+      :param indexes: List of indexes to be included in summary
+      :return: Generated summary
+
+
+   .. py:method:: get_sentences(text: str) -> List[str]
+
+      Splits input text into list of sentences.
+
+      :param text: Text to split
+      :return: List of sentences
+
+
+   .. py:method:: clean_sentences(sentences: List[str]) -> List[List[str]]
+      :staticmethod:
+
+      Tokenizes sentences and cleans words after that.
+
+      :param sentences: List of sentences
+      :return: List of cleaned and tokenized sentences
+
+
+

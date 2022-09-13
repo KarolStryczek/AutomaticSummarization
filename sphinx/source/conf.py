@@ -14,12 +14,18 @@ release = '1.0'
 # -- General configuration ---------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#general-configuration
 
-extensions = []
+extensions = [
+    'sphinx.ext.githubpages',
+    'autoapi.extension'
+]
+
+autoapi_type = 'python'
+autoapi_dirs = ['../../summarizers', '../../util']
 
 templates_path = ['_templates']
 exclude_patterns = []
 
-language = 'pl'
+language = 'en'
 
 # -- Options for HTML output -------------------------------------------------
 # https://www.sphinx-doc.org/en/master/usage/configuration.html#options-for-html-output

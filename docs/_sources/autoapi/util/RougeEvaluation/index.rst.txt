@@ -1,0 +1,131 @@
+:py:mod:`util.RougeEvaluation`
+==============================
+
+.. py:module:: util.RougeEvaluation
+
+
+Module Contents
+---------------
+
+Classes
+~~~~~~~
+
+.. autoapisummary::
+
+   util.RougeEvaluation.RougeScore
+   util.RougeEvaluation.RougeEvaluator
+
+
+
+
+.. py:class:: RougeScore(filename: str, psc_summary: util.PSCReader.PSCSummary, summarizer: summarizers.AbstractSummarizer.AbstractSummarizer, rouge_score: Dict[str, Dict[str, float]])
+
+   Utility class that stores ROUGE scores in evaluation process and contains methods that generates CSV records.
+
+   .. py:attribute:: __rouge1
+      :annotation: = rouge-1
+
+      
+
+   .. py:attribute:: __rouge2
+      :annotation: = rouge-2
+
+      
+
+   .. py:attribute:: __rougeL
+      :annotation: = rouge-l
+
+      
+
+   .. py:attribute:: __recall
+      :annotation: = r
+
+      
+
+   .. py:attribute:: __precision
+      :annotation: = p
+
+      
+
+   .. py:attribute:: __f_score
+      :annotation: = f
+
+      
+
+   .. py:method:: get_csv_record() -> Tuple[str, str, int, str, str, float, float, float, float, float, float, float, float, float]
+
+      Creates CSV record with columns:
+          - filename
+          - summary type
+          - summary length to text length ratio
+          - author
+          - used summarizer
+          - 9 columns of ROUGE-1, ROUGE-2, ROUGE-L - recall, precision and F-score
+
+      :return: Tuple with all necessary columns
+
+
+   .. py:method:: get_rouge_score_csv(rouge_score: Dict[str, float]) -> Tuple[float, float, float]
+
+      Returns tuple of recall, precision and F-score for given ROUGE score.
+
+      :param rouge_score: Dictionary with ROUGE scores
+      :return: Tuple of ROUGE scores
+
+
+   .. py:method:: __str__()
+
+      Return str(self).
+
+
+
+.. py:class:: RougeEvaluator
+
+   Class that enables ROUGE evaluation of text summarization algorithms on Polish Summaries Corpus.
+   Contains necessary methods to load Polish Summaries Corpus, evaluate implemented algorithms and save results.
+
+   .. py:method:: load_results() -> pandas.DataFrame
+      :staticmethod:
+
+      Loads previously saved CSV file with evaluation records (or empty file with no records, just columns).
+
+      :return: Pandas dataframe with evaluation records
+
+
+   .. py:method:: save_results() -> None
+
+      Saves calculated evalation results to result CSV file.
+
+      :return: None
+
+
+   .. py:method:: evaluate_all() -> None
+
+      Calculates recall, precision and F-Score of ROUGE-1, ROUGE-2 and ROUGE-L for all reference summaries
+      from Polish Summaries Corpus using all implemented summarizers.
+      Calculated scores are saved after each text processed (each text have multiple reference summaries).
+
+      :return: None
+
+
+   .. py:method:: evaluate_extractive(psc_text: util.PSCReader.PSCText) -> List[RougeScore]
+
+      Runs evaluation for all extractive summarizers.
+      For each reference summary generates extractive summaries,
+      consisting of the same number of sentences as reference summary.
+
+      :param psc_text: Text from Polish Summaries Corpus with reference summaries
+      :return: Scores for all reference summaries calculated with all summarizers
+
+
+   .. py:method:: evaluate_abstractive(psc_text: util.PSCReader.PSCText) -> List[RougeScore]
+
+      Runs evaluation for an abstractive summarizer.
+      For each reference summary generates extractive summaries,
+      consisting of the same number of sentences as reference summary.
+
+      :param psc_text: Text from Polish Summaries Corpus with reference summaries
+      :return: Scores for all reference summaries calculated with abstractive summarizer
+
+
+

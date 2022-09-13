@@ -1,0 +1,23 @@
+:py:mod:`summarizers`
+=====================
+
+.. py:module:: summarizers
+
+
+Submodules
+----------
+.. toctree::
+   :titlesonly:
+   :maxdepth: 1
+
+   AbstractSummarizer/index.rst
+   AbstractiveSummarizer/index.rst
+   ExtractiveSummarizer/index.rst
+   FrequencyBasedSummarizer/index.rst
+   LexRankSummarizer/index.rst
+   PageRankBasedSummarizer/index.rst
+   SumBasicSummarizer/index.rst
+   TFIDFSummarizer/index.rst
+   TextRankSummarizer/index.rst
+
+

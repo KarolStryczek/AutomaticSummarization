@@ -1,0 +1,37 @@
+:py:mod:`summarizers.FrequencyBasedSummarizer`
+==============================================
+
+.. py:module:: summarizers.FrequencyBasedSummarizer
+
+
+Module Contents
+---------------
+
+Classes
+~~~~~~~
+
+.. autoapisummary::
+
+   summarizers.FrequencyBasedSummarizer.FrequencyBasedSummarizer
+
+
+
+
+.. py:class:: FrequencyBasedSummarizer
+
+   Bases: :py:obj:`summarizers.ExtractiveSummarizer.ExtractiveSummarizer`, :py:obj:`abc.ABC`
+
+   Abstract super class for frequency based extractive summarizers.
+
+   Contains common method used in specific frequency based extractive summarizers implementations.
+
+   .. py:method:: calculate_tf_values(sentences: List[List[str]]) -> Dict[str, float]
+      :staticmethod:
+
+      Calculates words TF values as number of occurrences divided by words total count.
+
+      :param sentences: Tokenized list of sentences
+      :return: Dictionary of (words: TF) pairs
+
+
+

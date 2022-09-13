@@ -1,0 +1,146 @@
+:py:mod:`util.Utils`
+====================
+
+.. py:module:: util.Utils
+
+
+Module Contents
+---------------
+
+
+Functions
+~~~~~~~~~
+
+.. autoapisummary::
+
+   util.Utils.get_nkjp_idf_values
+   util.Utils.load_all_NKJP_texts
+   util.Utils.get_all_subdirectories
+   util.Utils.read_and_clean_nkjp_xml_file
+   util.Utils.calculate_idf_values
+   util.Utils.tokenize_and_clean_text
+   util.Utils.should_include_token
+   util.Utils.get_ranking
+   util.Utils.sort_dict_by_value
+   util.Utils.calculate_tf_values
+
+
+
+Attributes
+~~~~~~~~~~
+
+.. autoapisummary::
+
+   util.Utils.nlp
+   util.Utils.__default_language
+   util.Utils.__default_encoding
+   util.Utils.__NKJP_dir
+   util.Utils.__idf_filepath
+
+
+.. py:data:: nlp
+   
+
+   
+
+.. py:data:: __default_language
+   :annotation: = polish
+
+   
+
+.. py:data:: __default_encoding
+   :annotation: = utf-8
+
+   
+
+.. py:data:: __NKJP_dir
+   :annotation: = data/NKJP
+
+   
+
+.. py:data:: __idf_filepath
+   :annotation: = util/idf.p
+
+   
+
+.. py:function:: get_nkjp_idf_values() -> Dict[str, float]
+
+   Calculates IDF values for all words from texts in NKJP one million sub-corpus.
+   Values are serialized after calculation so they cen be used again without calculating them again.
+
+   :return: Dictionary of (word: IDF value) pairs
+
+
+.. py:function:: load_all_NKJP_texts() -> List[str]
+
+   Loads all texts from NKJP directory. That includes XML parsing, and pre-processing.
+
+   :return: List of loaded texts
+
+
+.. py:function:: get_all_subdirectories(directory: str) -> List[str]
+
+   Returns all subdirectories of given directory.
+
+   :param directory: The main directory
+   :return: List of subdirectories
+
+
+.. py:function:: read_and_clean_nkjp_xml_file(file: TextIO) -> str
+
+   Loads and cleand NKJP file in TEI standard.
+
+   :param file: NKJP file to be parsed and cleaned.
+   :return: NKJP file text.
+
+
+.. py:function:: calculate_idf_values(corpus: List[str]) -> Dict[str, float]
+
+   Calculates IDF values for words within given corpus.
+
+   :param corpus: Corpus of texts
+   :return: Dictionary of (word: IDF value) pairs
+
+
+.. py:function:: tokenize_and_clean_text(text: str) -> List[str]
+
+   Text tokenization with lemmatization, lowercase, stopwords and punctuation marks removal.
+
+   :param text: Input text to tokenize and clean
+   :return: List of cleaned tokens
+
+
+.. py:function:: should_include_token(token: spacy.tokens.token.Token) -> bool
+
+   Determines if token should be included in tokens list.
+   Removes stopwords, whitespaces and punctuation marks.
+
+   :param token: spaCy token to be checked
+   :return: Flag indicating if token should be included in tokens list
+
+
+.. py:function:: get_ranking(scores: List[float], n: int) -> List[int]
+
+   Returns indexes of top ranked sentences based on their scores.
+
+   :param scores: List of scores calculated for sentences
+   :param n: Number of top indexes to return
+   :return: List of top indexes sorted by score
+
+
+.. py:function:: sort_dict_by_value(dic: Dict[Any, Any]) -> Dict[Any, Any]
+
+   Sorts dictionary by its values in reversed order.
+
+   :param dic: Dictionary to be sorted
+   :return: Sorted dictionary
+
+
+.. py:function:: calculate_tf_values(tokenized_sentence: List[str]) -> Dict[str, int]
+
+   Calculates TF values for words in given sentence.
+
+   :param tokenized_sentence: Tokenized sentence
+   :return: Dictionary of (token: TF value) pairs
+
+
