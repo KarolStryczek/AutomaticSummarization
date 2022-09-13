@@ -75,7 +75,7 @@ class AbstractiveSummarizer(AbstractSummarizer):
             :param text: Text to translate
             :param source_language: Translation source language
             :param target_language: Translation target language
-            :return:
+            :return: Translated text
         """
         self.translator_tokenizer.src_lang = source_language
         encoded_input = self.translator_tokenizer(text, return_tensors="pt").to(self.__device)
