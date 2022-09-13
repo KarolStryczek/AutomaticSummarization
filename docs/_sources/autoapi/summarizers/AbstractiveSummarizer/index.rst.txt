@@ -55,7 +55,7 @@ Classes
       :param text: Text to translate
       :param source_language: Translation source language
       :param target_language: Translation target language
-      :return:
+      :return: Translated text
 
 
 
