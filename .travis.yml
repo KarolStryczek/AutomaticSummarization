@@ -3,6 +3,7 @@ python:
   - "3.8"
 install:
   - pip install numpy nltk spacy bs4 lxml
+  - python -m nltk.downloader punkt
   - python -m spacy download pl_core_news_sm
 script:
   - python -m pytest test.py
