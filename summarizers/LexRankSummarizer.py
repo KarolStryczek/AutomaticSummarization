@@ -1,5 +1,5 @@
 from .PageRankBasedSummarizer import PageRankBasedSummarizer
-from typing import List
+from typing import List, Dict
 from util import Utils
 import numpy as np
 
@@ -12,9 +12,12 @@ class LexRankSummarizer(PageRankBasedSummarizer):
         and implements only sentence similarity calculation function.
     """
 
-    def __init__(self) -> None:
+    def __init__(self, test_idfs: Dict[str, float] = None) -> None:
         super().__init__()
-        self.idfs = Utils.get_nkjp_idf_values()
+        if test_idfs is not None:
+            self.idfs = test_idfs
+        else:
+            self.idfs = Utils.get_nkjp_idf_values()
         self.default_idf = max(self.idfs.values())
 
     def calculate_similarity(self, sentence_x: List[str], sentence_y: List[str]) -> float:

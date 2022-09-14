@@ -1,5 +1,5 @@
 from .FrequencyBasedSummarizer import FrequencyBasedSummarizer
-from typing import List
+from typing import List, Dict
 from util import Utils
 
 
@@ -8,9 +8,12 @@ class TFIDFSummarizer(FrequencyBasedSummarizer):
         Implementation of TF-IDF-based text summarizer for Polish language.
     """
 
-    def __init__(self) -> None:
+    def __init__(self, test_idfs: Dict[str, float] = None) -> None:
         super().__init__()
-        self.idfs = Utils.get_nkjp_idf_values()
+        if test_idfs is not None:
+            self.idfs = test_idfs
+        else:
+            self.idfs = Utils.get_nkjp_idf_values()
         self.default_idf = max(self.idfs.values())
 
     def summarize(self, text: str, size: int) -> str:
