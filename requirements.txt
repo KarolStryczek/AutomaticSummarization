@@ -1,3 +1,4 @@
+alabaster==0.7.12
 astroid==2.12.9
 Babel==2.10.3
 beautifulsoup4==4.11.1
