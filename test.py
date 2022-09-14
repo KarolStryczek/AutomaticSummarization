@@ -2,7 +2,6 @@ from summarizers.SumBasicSummarizer import SumBasicSummarizer
 from summarizers.TextRankSummarizer import TextRankSummarizer
 from summarizers.LexRankSummarizer import LexRankSummarizer
 from summarizers.TFIDFSummarizer import TFIDFSummarizer
-from summarizers.AbstractSummarizer import AbstractSummarizer
 from util import Utils
 import math
 import numpy as np
